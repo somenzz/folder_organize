@@ -72,7 +72,7 @@ def organize(dir):
 
         if done != 1:
             # if the file was not present in the dictionary the make Others folder  and move the file there
-            destf = dest / "Others"
+            destf = dest / "其他"
             destf.mkdir(exist_ok=True)
             _msg = move_safe(str(file.resolve()), str(destf))
             if _msg:
