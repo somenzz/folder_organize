@@ -4,19 +4,21 @@ import os
 import json
 import sys
 
-#生成资源文件目录访问路径
+# 生成资源文件目录访问路径
 def resource_path(relative_path):
-    if getattr(sys, 'frozen', False): #是否Bundle Resource
+    if getattr(sys, "frozen", False):  # 是否Bundle Resource
         base_path = sys._MEIPASS
     else:
         base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
+
 config = None
 with open(resource_path("config/config.json")) as reader:
     config = json.load(reader)
 
-filetypes = config['filetypes']
+filetypes = config["filetypes"]
+
 
 def move_safe(src, dst):
     """_summary_
@@ -30,12 +32,11 @@ def move_safe(src, dst):
     """
     msg = ""
     try:
-        shutil.move(src,dst)
+        shutil.move(src, dst)
     except Exception as e:
         msg = f"{src} -> {dst} error: {e}"
         print(msg)
     return msg
-
 
 
 def organize(dir):
@@ -65,8 +66,8 @@ def organize(dir):
                 destf = dest / f"{k}"
                 destf.mkdir(exist_ok=True)
                 src = f"{file.resolve()}"
-                dst = f"{destf}" 
-                _msg = move_safe(src,dst)
+                dst = f"{destf}"
+                _msg = move_safe(src, dst)
                 if _msg:
                     error_msg.append(_msg)
 
@@ -94,16 +95,17 @@ def restore(dir):
         return
     parent_path = p.parent
     done = True
-    for root,_,files in os.walk(p):
+    for root, _, files in os.walk(p):
         for f in files:
             src = f"{root}/{f}"
             dst = f"{parent_path}/{f}"
-            _msg = move_safe(src,dst)
+            _msg = move_safe(src, dst)
             if _msg:
                 err_msgs.append(_msg)
     if done:
         print(f"为了确保安全，你可以手动删除 {dir}")
     return err_msgs
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     organize("/Users/aaron/Downloads")

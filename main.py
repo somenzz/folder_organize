@@ -9,6 +9,7 @@ window = Tk()
 window.title("文件分类器-V1.0")
 path = StringVar()
 
+
 def selectPath():
     path_ = askdirectory()
     print(path_)
@@ -80,7 +81,6 @@ Button(window, padx=20, text="清空", command=clear).grid(row=2, column=1)
 status = Text(window, width=60, height=10, padx=8)
 status.grid(row=3, column=0, columnspan=3)
 
-# N
 scroll = Scrollbar()
 scroll.grid(row=3, column=2, sticky=S + N)
 # 两个控件关联
