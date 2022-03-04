@@ -1,0 +1,54 @@
+{
+    "filetypes": {
+        "图片": [
+            "png",
+            "jpg",
+            "jfif",
+            "webp",
+            "jpeg",
+            "bmp",
+            "tiff",
+            "gif",
+            "raw",
+            "psd"
+        ],
+        "文档": [
+            "doc",
+            "docx",
+            "ppt",
+            "pptx",
+            "csv",
+            "xls",
+            "xlsx",
+            "pdf",
+            "txt"
+        ],
+        "视频": [
+            "mp4",
+            "mpeg",
+            "mkv",
+            "srt"
+        ],
+        "代码": [
+            "html",
+            "css",
+            "js",
+            "py",
+            "cpp",
+            "c",
+            "go",
+            "java"
+        ],
+        "音频": [
+            "mp3",
+            "wav",
+            "ogg"
+        ],
+        "压缩包": [
+            "zip",
+            "tar",
+            "rar",
+            "7z"
+        ]
+    }
+}
