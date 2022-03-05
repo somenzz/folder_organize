@@ -33,10 +33,12 @@ python3 main.py
 
 点击下载：
 
-[Windows](https://github.com/somenzz/folder_organize/releases/download/v1.0/V1.0.exe)
+Mac 使用时确保-系统偏好设置-安全性与隐私-允许从以下位置下载的App-任何来源
 
 [Mac](https://github.com/somenzz/folder_organize/releases/download/v1.0/V1.0.app.zip)
 
+
+[Windows](https://github.com/somenzz/folder_organize/releases/download/v1.0/V1.0.exe)
 
 
 ## 技术交流群
