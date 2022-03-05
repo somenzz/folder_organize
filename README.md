@@ -26,7 +26,7 @@
 
 1. GUI
 ```sh
-git clone 
+git clone https://github.com/somenzz/folder_organize.git 
 python3 main.py
 ```
 
