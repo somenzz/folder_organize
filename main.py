@@ -9,7 +9,7 @@ import platform
 import os
 
 window = Tk()
-window.title("文件分类器-V1.0 by somenzz")
+window.title("文件分类&归集器-V1.0 by somenzz")
 PATH = StringVar()
 
 
@@ -77,7 +77,8 @@ def editconfig():
     if platform.system() == "Darwin":
         subprocess.call(["open","-e", config_file.as_posix()])
     elif platform.system() == "Windows":
-        os.startfile(config_file.as_posix())
+        subprocess.call(["notepad", config_file.as_posix()])
+        # os.startfile(config_file.as_posix())
     else:## Linux
         subprocess.call(["xdg-open", config_file.as_posix()])
 
