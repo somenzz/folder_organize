@@ -13,12 +13,32 @@ def resource_path(relative_path):
     return os.path.join(base_path, relative_path)
 
 
-config = None
-with open(resource_path("config/config.json")) as reader:
-    config = json.load(reader)
+config = {
+    "filetypes": {
+        "图片": [
+            "png", "jpg", "jfif", "webp", "jpeg", "bmp", "tiff", "gif", "raw", "psd",
+        ],
+        "文档": ["doc", "docx", "ppt", "pptx", "csv", "xls", "xlsx", "pdf", "txt"],
+        "视频": ["mp4", "mpeg", "mkv", "srt"],
+        "代码": ["html", "css", "js", "py", "cpp", "c", "go", "java"],
+        "音频": ["mp3", "wav", "ogg"],
+        "压缩包": ["zip", "tar", "rar", "7z"],
+    }
+}
 
-filetypes = config["filetypes"]
+config_file_path = Path().home() / ".folder_organize"
+config_file_path.mkdir(exist_ok=True)
+config_file = config_file_path / "config.json"
 
+if not config_file.exists():
+    with open(config_file,"w",encoding="utf-8") as writer:
+        json.dump(config, writer, ensure_ascii=False,indent=4)
+
+def get_config():
+    if config_file.exists():
+        with open(config_file.as_posix(),"r",encoding="utf-8") as reader:
+            config = json.load(reader)
+    return config["filetypes"]
 
 def move_safe(src, dst):
     """_summary_
@@ -39,17 +59,17 @@ def move_safe(src, dst):
     return msg
 
 
-def organize(dir):
+def organize(dir :Path):
+    filetypes = get_config()
     error_msg = []
-    PATH = Path(dir)
     files = []
     # A list to store all the files in the PATH
     # All the files will go to the organized folder
-    dest = PATH / "自动分类的目录"
+    dest = dir / "Organized"
     # Make the folder only if it does not exists
     dest.mkdir(exist_ok=True)
     # iterate every file and directory and store only the files in the 'files' list
-    for i in PATH.iterdir():
+    for i in dir.iterdir():
         if i.is_file():
             files.append(i)
 
@@ -65,9 +85,7 @@ def organize(dir):
                 # make a new folder with `key name` and move the file there
                 destf = dest / f"{k}"
                 destf.mkdir(exist_ok=True)
-                src = f"{file.resolve()}"
-                dst = f"{destf}"
-                _msg = move_safe(src, dst)
+                _msg = move_safe(str(file.resolve()), str(destf))
                 if _msg:
                     error_msg.append(_msg)
 
@@ -81,7 +99,7 @@ def organize(dir):
     return dest, error_msg
 
 
-def restore(dir):
+def restore(dir: Path) -> list:
     """_summary_
     将目标路径中的所有文件提取到当前目录，并删除目标路径
     eg: /dir1/dir2/files...
@@ -90,22 +108,17 @@ def restore(dir):
         dir (_type_): 待处理的路径
     """
     err_msgs = []
-    p = Path(dir)
-    if not p.exists():
-        return
-    parent_path = p.parent
-    done = True
-    for root, _, files in os.walk(p):
-        for f in files:
-            src = f"{root}/{f}"
-            dst = f"{parent_path}/{f}"
-            _msg = move_safe(src, dst)
+    if not dir.exists():
+        return []
+    parent_path = dir.parent
+    for item in dir.rglob("*"):
+        if item.is_file():
+            _msg = move_safe(item.as_posix(), (parent_path / item.name).as_posix())
             if _msg:
                 err_msgs.append(_msg)
-    if done:
-        print(f"为了确保安全，你可以手动删除 {dir}")
     return err_msgs
 
 
 if __name__ == "__main__":
-    organize("/Users/aaron/Downloads")
+    print(get_config())
+    restore("/Users/aaron/Desktop/Organized")
