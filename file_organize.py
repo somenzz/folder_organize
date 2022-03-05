@@ -3,7 +3,7 @@ import shutil
 import os
 import json
 import sys
-
+import fire
 # 生成资源文件目录访问路径
 def resource_path(relative_path):
     if getattr(sys, "frozen", False):  # 是否Bundle Resource
@@ -118,7 +118,11 @@ def restore(dir: Path) -> list:
                 err_msgs.append(_msg)
     return err_msgs
 
+class Command(object):
+    def organize(self,dir: str):
+        organize(Path(dir))
+    def collect(self,dir: str):
+        restore(Path(dir))
 
 if __name__ == "__main__":
-    print(get_config())
-    restore("/Users/aaron/Desktop/Organized")
+    fire.Fire(Command)

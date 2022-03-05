@@ -24,10 +24,26 @@
 
 #### 从源码运行：
 
+1. GUI
 ```sh
 git clone 
 python3 main.py
 ```
+
+2. 命令行
+
+对某一目录分类存放：
+
+```sh
+python file_organize.py organize /Users/aaron/Desktop
+```
+对某一目录文件收集：
+
+```sh
+python file_organize.py collect /Users/aaron/Desktop
+```
+
+
 
 #### 打包好的文件
 
