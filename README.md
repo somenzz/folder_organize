@@ -43,8 +43,6 @@ python file_organize.py organize /Users/aaron/Desktop
 python file_organize.py collect /Users/aaron/Desktop
 ```
 
-
-
 #### 打包好的文件
 
 点击下载：
@@ -56,6 +54,14 @@ Mac 使用时确保-系统偏好设置-安全性与隐私-允许从以下位置�
 
 [Windows](https://github.com/somenzz/folder_organize/releases/download/v1.0/V1.0.exe)
 
+
+## tkinter
+
+代码用到了 tkiner、json、shutil、pathlib 等标准库，可供参考。
+
+如果你对 GUI 编程感兴趣，推荐一本书，扫码购买，开启你的 GUI 编程之旅。
+
+![](./pic/tkinter.JPG)
 
 ## 技术交流群
 
